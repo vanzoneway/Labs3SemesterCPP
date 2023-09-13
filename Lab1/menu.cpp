@@ -27,32 +27,34 @@ int get_variant()
     return var;
 }
 
-int checkingOneError(int error){
-    if(error!=1){
-        return error;
+bool checkingError(string s){
+    int size = s.length();
+    for(int i = 0; i != size; i++){
+        if(s[i] >= '0' && s[i] <= '9')
+            continue;
+        else
+            return true;
+
     }
-    char temp = getchar();
-    while(temp!='\n'){
-        if (temp > '9' || temp < '0') {
-            return -2;
-        }
-    }
-    return 1;
+    return false;
 }
-int goodScanfInt(){
-    int num = 0;
-    rewind(stdin);
-    while(checkingOneError(scanf("%d",&num))!=1){
-        printf("You wrote an incorrect symbol. Try again!\n>");
-        rewind(stdin);
+int goodIntInput(){
+    string s;
+    getline(cin, s);
+    while(checkingError(s)){
+        cout << "You input a wrong symbols! Try again" << endl;
+        cin.clear();
+        getline(cin, s);
     }
-    return num;
+
+    return stoi(s);
 }
+
 
 void check_variant(int& var){
     if (var > 6 || var < 1){
         cout << "You wrote a wrong variant! Try again!" << endl;
-        var = goodScanfInt();
+        var = goodIntInput();
 
     }
 }
@@ -65,7 +67,7 @@ void menu()
     getline(cin, str);
     String p(data(str));
     print_menu();
-    int variant = goodScanfInt();
+    int variant = goodIntInput();
     check_variant(variant);
     do
     {
@@ -76,18 +78,18 @@ void menu()
                 getline(cin, str);
                 p.add(str);
                 print_menu();
-                variant = goodScanfInt();
+                variant = goodIntInput();
                 check_variant(variant);
                 break;
             case 2:
                 cout << "Input indexes to remove\n>";
                 cout << "i1: ";
-                i1 = goodScanfInt();
+                i1 = goodIntInput();
                 cout << "i2: ";
-                i2 = goodScanfInt();
+                i2 = goodIntInput();
                 p.remove(i1, i2);
                 print_menu();
-                variant = goodScanfInt();
+                variant = goodIntInput();
                 check_variant(variant);
                 break;
             case 3:
@@ -95,19 +97,19 @@ void menu()
                 getline(cin, str);
                 cout << "Your substring at " << p.find(str) << " index position" << endl;
                 print_menu();
-                variant = goodScanfInt();
+                variant = goodIntInput();
                 check_variant(variant);
                 break;
             case 4:
                 cout << "Length of class String is " << p.getSize() << endl;
                 print_menu();
-                variant = goodScanfInt();
+                variant = goodIntInput();
                 check_variant(variant);
                 break;
             case 5:
                 cout << p.getStr() << endl;
                 print_menu();
-                variant = goodScanfInt();
+                variant = goodIntInput();
                 check_variant(variant);
                 break;
             default:
