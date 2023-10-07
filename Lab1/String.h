@@ -30,7 +30,6 @@ public:
 private:
     void swap(String & a);
 
-
 };
 
 
