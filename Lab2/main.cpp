@@ -6,7 +6,7 @@ int main() {
     p += b;
     String c = p + b;
     c.add("Ruslan");
-    cout << (p != b) << endl;
+    cout << c << endl;
 
 //    menu();
     return 0;
